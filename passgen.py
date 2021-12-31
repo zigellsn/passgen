@@ -112,8 +112,8 @@ if __name__ == '__main__':
     parser.add_argument("--punctuation", help="Punctuation", action=argparse.BooleanOptionalAction)
     parser.add_argument("--sap", help="SAP conform password (=> 'Do not start with ! or ?')",
                         action=argparse.BooleanOptionalAction)
-    parser.add_argument("--custom", help="Custom characters file", type=argparse.FileType("r", encoding="UTF-8"),
-                        required=False)
+    parser.add_argument("--custom", help="Custom characters file (UTF-8 encoding)",
+                        type=argparse.FileType("r", encoding="UTF-8"), required=False)
     args = parser.parse_args()
 
     _passgen(args.length, args.count, args.ascii, args.lowercase, args.uppercase, args.digits, args.punctuation,

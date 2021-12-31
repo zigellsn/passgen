@@ -17,4 +17,4 @@ Python Password Generator
 | --digits         | Digits                                               | true          |
 | --punctuation    | Punctuation                                          | false         |
 | --sap            | SAP conform password (=> 'Do not start with ! or ?') | false         |
-| --custom         | File containing custom characters                    | none          |
+| --custom         | File containing custom characters (UTF-8 encoding)   | none          |
