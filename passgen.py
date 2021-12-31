@@ -49,13 +49,17 @@ def _passgen(password_length, count, ascii_letters, lowercase, uppercase, digits
         std_password = True
 
     if avoid_zero:
-        characters.replace('0', '')
-        characters.replace('O', '')
+        characters = characters.replace("0", "")
+        characters = characters.replace("O", "")
 
     if avoid_one:
-        characters.replace('1', '')
-        characters.replace('l', '')
-        characters.replace('I', '')
+        characters = characters.replace("1", "")
+        characters = characters.replace("l", "")
+        characters = characters.replace("I", "")
+
+    if len(characters) == 0:
+        print("No characters for password left.")
+        exit()
 
     i = 0
     while i < count:
