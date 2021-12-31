@@ -23,7 +23,7 @@ def _contains_any(contains_string, contains_set):
     return 1 in [c in contains_string for c in contains_set]
 
 
-def _passgen(password_length, count, ascii_letters, lowercase, uppercase, digits, punctuation, sap, obligatory,
+def _passgen(password_length, count, ascii_letters, lowercase, uppercase, digits, punctuation, system, obligatory,
              avoid_zero, avoid_one, custom_chars_file):
     custom_chars = None
     if custom_chars_file is not None:
@@ -65,7 +65,7 @@ def _passgen(password_length, count, ascii_letters, lowercase, uppercase, digits
     i = 0
     while i < count:
         passwort = ''.join([choice(characters) for i in range(password_length)])
-        if sap and (passwort[0] == "!" or passwort[0] == "?"):
+        if system == "SAP" and (passwort[0] == "!" or passwort[0] == "?"):
             continue
         if obligatory:
             if std_password:
@@ -111,11 +111,14 @@ if __name__ == '__main__':
     parser.add_argument("--uppercase", help="Uppercase", action=argparse.BooleanOptionalAction)
     parser.add_argument("--digits", help="Digits", action=argparse.BooleanOptionalAction)
     parser.add_argument("--punctuation", help="Punctuation", action=argparse.BooleanOptionalAction)
-    parser.add_argument("--sap", help="SAP conform password (=> 'Do not start with ! or ?')",
-                        action=argparse.BooleanOptionalAction)
+    parser.add_argument("--system", help="System password conformity (SAP, ...)", default="")
     parser.add_argument("--custom", help="Custom characters file (UTF-8 encoding)",
                         type=argparse.FileType("r", encoding="UTF-8"), required=False)
     args = parser.parse_args()
 
+    if args.system != "" and args.system != "SAP":
+        print(f"Unknown system: {args.system}")
+        exit()
+
     _passgen(args.length, args.count, args.ascii, args.lowercase, args.uppercase, args.digits, args.punctuation,
-             args.sap, args.obligatory, args.avoid_zero, args.avoid_one, args.custom)
+             args.system, args.obligatory, args.avoid_zero, args.avoid_one, args.custom)
