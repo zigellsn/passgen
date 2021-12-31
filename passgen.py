@@ -44,7 +44,8 @@ def _passgen(password_length, count, ascii_letters, lowercase, uppercase, digits
         characters += string.punctuation
 
     std_password = False
-    if not ascii_letters and not lowercase and not uppercase and not digits and not punctuation and custom_chars == "":
+    if not ascii_letters and not lowercase and not uppercase and not digits and not punctuation \
+            and custom_chars is None:
         characters = string.ascii_lowercase + string.digits
         std_password = True
 
